@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2022 at 01:06 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Generation Time: Jul 12, 2022 at 02:42 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,10 +19,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `BE16_CR9_mohamad`
+-- Database: `be16_cr9_mohamad`
 --
-CREATE DATABASE IF NOT EXISTS `BE16_CR9_mohamad` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `BE16_CR9_mohamad`;
+CREATE DATABASE IF NOT EXISTS `be16_cr9_mohamad` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `be16_cr9_mohamad`;
 
 -- --------------------------------------------------------
 
@@ -180,6 +181,30 @@ INSERT INTO `order` (`Order_id`, `OrderDate`, `ShipDate`, `DeliveryDate`, `Quant
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `photo`
+--
+
+CREATE TABLE `photo` (
+  `photo_id` int(11) NOT NULL,
+  `photo` varchar(40) DEFAULT NULL,
+  `photo_date` datetime DEFAULT NULL,
+  `fk_product_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `photo`
+--
+
+INSERT INTO `photo` (`photo_id`, `photo`, `photo_date`, `fk_product_id`) VALUES
+(1, 'image', '2022-07-20 14:40:33', 2),
+(2, 'image2', '2022-07-26 14:40:33', 5),
+(3, 'image3', '2022-07-10 14:41:18', 7),
+(4, 'image4', '2022-07-06 14:41:45', 4),
+(5, 'image5', '2022-07-03 14:41:45', 8);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `product`
 --
 
@@ -187,7 +212,6 @@ CREATE TABLE `product` (
   `product_id` int(11) NOT NULL,
   `Name` varchar(30) NOT NULL,
   `Description` varchar(500) NOT NULL,
-  `Photo` varchar(30) DEFAULT NULL,
   `Price` int(11) NOT NULL,
   `fk_set_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -196,16 +220,16 @@ CREATE TABLE `product` (
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`product_id`, `Name`, `Description`, `Photo`, `Price`, `fk_set_id`) VALUES
-(1, 'Miniskirt', 'The miniskirt pays homage to \'60s elegance with the D-Little Vichy motif in navy blue, white and red. Crafted in wool twill, it is distinguished by a streamlined, slightly flared silhouette. The miniskirt can be worn with the matching jacket to complete the look.\r\n', 'miniskirt.jpg', 48, 1),
-(2, 'Long Skirt', 'The long skirt is created from gently pleated pale pink polka dot plumetis tulle. It skims the ankles and is fully lined with an underskirt of tonal cotton chiffon. Elegant finishings include an elasticated waistband of grosgrain ribbon and a subtly embroidered \'DIOR\' signature at the hem. This skirt can be paired with a blouse and the Miss B ballerinas for a special occasion.\r\n', 'longskirt.jpg', 59, 1),
-(3, 'Pencil', 'NYONI 2B / HB / 14B Sketch Pencil Set of 12  / Karton Special Drawing Pencil Sketch Art', 'Drawing_Pencil.jpg', 14, 6),
-(4, 'Pencil 50', 'NYONI 2B / HB / 14B Sketch Pencil Set of 50  / Karton Special Drawing Pencil Sketch Art', 'Drawing_Pencil.jpg', 48, 6),
-(5, 'Handmade Bowl', 'Modern Casual Style, Decorative Handmade, (Stoneware Quality) Ceramic Bowl Tabletop Centerpiece. Handmade Beige Ceramic & Bright Green Glass Impressive Decorative Bowl.\r\n', 'Handmade_bowl.jpg', 67, 5),
-(6, 'Handmade Big Bowl', 'Modern Casual Style, Decorative Handmade, (Stoneware Quality) Ceramic Bowl Tabletop Centerpiece. Handmade Beige Ceramic & Bright Green Glass Impressive Decorative Bowl. -Big\r\n', 'BowlBig.jpg', 88, 5),
-(7, 'Divine Comedy', 'The Divine Comedy (Italian: Divina Commedia Italian pronunciation: [diˈviːna komˈmɛːdja]) is an Italian narrative poem by Dante Alighieri, begun c. 1308 and completed in 1320, a year before his death in 1321.', 'Alighieri.jpg', 123, 2),
-(8, 'Divine Comedy', 'The Divine Comedy (Italian: Divina Commedia Italian pronunciation: [diˈviːna komˈmɛːdja]) is an Italian narrative poem by Dante Alighieri, begun c. 1308 and completed in 1320, a year before his death in 1321.', 'Alighieri.jpg', 134, 2),
-(9, 'Copy of Picassos Bowl of Fruit', 'Picasso\'s Bowl of Fruit, Violin and Bottle is typical of his Synthetic Cubism, in which he uses various means - painted dots, silhouettes, grains of sand - to allude to the depicted objects. ', 'Picasso.jpg', 1269, 4);
+INSERT INTO `product` (`product_id`, `Name`, `Description`, `Price`, `fk_set_id`) VALUES
+(1, 'Miniskirt', 'The miniskirt pays homage to \'60s elegance with the D-Little Vichy motif in navy blue, white and red. Crafted in wool twill, it is distinguished by a streamlined, slightly flared silhouette. The miniskirt can be worn with the matching jacket to complete the look.\r\n', 48, 1),
+(2, 'Long Skirt', 'The long skirt is created from gently pleated pale pink polka dot plumetis tulle. It skims the ankles and is fully lined with an underskirt of tonal cotton chiffon. Elegant finishings include an elasticated waistband of grosgrain ribbon and a subtly embroidered \'DIOR\' signature at the hem. This skirt can be paired with a blouse and the Miss B ballerinas for a special occasion.\r\n', 59, 1),
+(3, 'Pencil', 'NYONI 2B / HB / 14B Sketch Pencil Set of 12  / Karton Special Drawing Pencil Sketch Art', 14, 6),
+(4, 'Pencil 50', 'NYONI 2B / HB / 14B Sketch Pencil Set of 50  / Karton Special Drawing Pencil Sketch Art', 48, 6),
+(5, 'Handmade Bowl', 'Modern Casual Style, Decorative Handmade, (Stoneware Quality) Ceramic Bowl Tabletop Centerpiece. Handmade Beige Ceramic & Bright Green Glass Impressive Decorative Bowl.\r\n', 67, 5),
+(6, 'Handmade Big Bowl', 'Modern Casual Style, Decorative Handmade, (Stoneware Quality) Ceramic Bowl Tabletop Centerpiece. Handmade Beige Ceramic & Bright Green Glass Impressive Decorative Bowl. -Big\r\n', 88, 5),
+(7, 'Divine Comedy', 'The Divine Comedy (Italian: Divina Commedia Italian pronunciation: [diˈviːna komˈmɛːdja]) is an Italian narrative poem by Dante Alighieri, begun c. 1308 and completed in 1320, a year before his death in 1321.', 123, 2),
+(8, 'Divine Comedy', 'The Divine Comedy (Italian: Divina Commedia Italian pronunciation: [diˈviːna komˈmɛːdja]) is an Italian narrative poem by Dante Alighieri, begun c. 1308 and completed in 1320, a year before his death in 1321.', 134, 2),
+(9, 'Copy of Picassos Bowl of Fruit', 'Picasso\'s Bowl of Fruit, Violin and Bottle is typical of his Synthetic Cubism, in which he uses various means - painted dots, silhouettes, grains of sand - to allude to the depicted objects. ', 1269, 4);
 
 -- --------------------------------------------------------
 
@@ -329,6 +353,13 @@ ALTER TABLE `order`
   ADD KEY `Fk_ship_id` (`Fk_ship_id`);
 
 --
+-- Indexes for table `photo`
+--
+ALTER TABLE `photo`
+  ADD PRIMARY KEY (`photo_id`),
+  ADD KEY `fk_product_id` (`fk_product_id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
@@ -389,6 +420,12 @@ ALTER TABLE `order`
   MODIFY `Order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `photo`
+--
+ALTER TABLE `photo`
+  MODIFY `photo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
@@ -444,6 +481,12 @@ ALTER TABLE `famazon`
 --
 ALTER TABLE `order`
   ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`Fk_ship_id`) REFERENCES `shiping` (`shiping_id`);
+
+--
+-- Constraints for table `photo`
+--
+ALTER TABLE `photo`
+  ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`fk_product_id`) REFERENCES `product` (`product_id`);
 
 --
 -- Constraints for table `product`
